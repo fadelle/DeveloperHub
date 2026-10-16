@@ -119,10 +119,25 @@
         }
       });
 
+      var searchIndexPromise = null;
+      function loadSearchIndex() {
+        if (!searchIndexPromise) {
+          searchIndexPromise = fetch("/search-index.json").then(function (r) { return r.json(); });
+        }
+        return searchIndexPromise;
+      }
+
       function runSearch(query) {
-        fetch("/api/search?q=" + encodeURIComponent(query))
-          .then(function (r) { return r.json(); })
-          .then(function (items) {
+        loadSearchIndex()
+          .then(function (allItems) {
+            var needle = query.toLowerCase();
+            var items = allItems
+              .filter(function (item) {
+                return item.title.toLowerCase().indexOf(needle) !== -1 ||
+                  (item.searchText && item.searchText.toLowerCase().indexOf(needle) !== -1);
+              })
+              .slice(0, 20);
+
             if (!items.length) {
               resultsBox.innerHTML = '<div class="search-empty">No matches for "' + escapeHtml(query) + '"</div>';
               resultsBox.classList.add("open");

@@ -14,6 +14,60 @@ dotnet run
 Then open `http://localhost:5171` (or whatever port the console prints). The app also has a
 `.claude/launch.json` entry (`devknowledgehub`) for opening it in the Claude Code browser pane.
 
+## Deploying to GitHub Pages
+
+This is a real ASP.NET Core server (Razor Pages, server-side Markdown parsing, a live search
+endpoint) — GitHub Pages only serves static files, so it can't run the app directly. Instead,
+[`tools/export-static.js`](tools/export-static.js) boots the real app on a scratch port, crawls
+every page via a `/__routes.json` discovery endpoint, and saves each page's actual rendered HTML
+to disk — same CSS, same JS, same layout, nothing reimplemented. The one functional difference:
+`/api/search` (a live server endpoint) is replaced by a static `search-index.json` that `site.js`
+fetches once and filters client-side — same debounced search box, same results, just client-side.
+
+**It's wired to deploy automatically**: [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml)
+runs the export and publishes to GitHub Pages on every push to `main`. One-time setup needed in
+the repo: **Settings → Pages → Source → GitHub Actions** (instead of "Deploy from a branch") —
+I can't flip that setting myself, it's a repo-settings change.
+
+To export and preview it locally instead — two ways, depending on what you're checking:
+
+```bash
+# Quick sanity check — no subpath, open http://localhost:8080 directly
+node tools/export-static.js dist
+node tools/static-serve.js dist 8080
+
+# Exact rehearsal of the real GitHub Pages URL structure — open
+# http://localhost:8080/DeveloperHub/ (note the path: the export bakes
+# "/DeveloperHub" into every link, so the site only resolves correctly
+# under that same subpath locally too, not at the server root)
+node tools/export-static.js dist /DeveloperHub
+node tools/static-serve.js dist 8080
+```
+
+(`tools/static-serve.js` is a zero-dependency static file server for exactly this — smoke-testing
+the exported `dist/` folder before trusting it to a real deploy. The Claude Code browser pane also
+has a `devknowledgehub-static-preview` launch entry wired to it, serving `dist/` on port 8080.)
+
+The base-path argument matters because a GitHub Pages *project* site (not a
+`<user>.github.io` root site) is served at `https://<user>.github.io/<repo>/`, a subpath, so every
+root-relative link (`href="/topics/..."`, the JS's `fetch("/search-index.json")`, even the values
+*inside* `search-index.json`) needs that prefix rewritten in — the export script does this as a
+string-rewrite pass over the rendered output, documented in the script's own comments. Omit the
+argument (or pass `""`) if hosting at a domain root instead (a custom domain, or a `<user>.github.io`
+user/org page).
+
+**One real gotcha the hard way, in case the export tool ever needs touching again:** ASP.NET
+Core's `MapStaticAssets()` serves CSS/JS under content-hashed URLs (`site.34dw87a5u2.css`) that
+only resolve through the live server's own middleware — there's no file by that name in `wwwroot`
+to just copy. The export script instead *fetches* each asset from the live server at its real
+rendered URL and saves it under that exact name. It also must run the scratch server with
+`ASPNETCORE_ENVIRONMENT=Development` — in Production, without a full `dotnet publish`, that
+fingerprinting middleware silently serves empty bodies instead of erroring.
+
+This is a snapshot, not a live mirror of `Content/` — the GitHub Actions workflow regenerates it
+on every push, so day-to-day you don't need to think about it; only run the export manually when
+previewing offline.
+
 ## Build verification
 
 ```bash
