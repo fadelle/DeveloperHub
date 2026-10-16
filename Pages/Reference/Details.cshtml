@@ -1,0 +1,38 @@
+@page "/reference/{slug}"
+@model DevKnowledgeHub.Pages.Reference.DetailsModel
+@{
+    ViewData["Title"] = Model.Article.Title;
+    ViewData["Crumbs"] = new List<BreadcrumbItem>
+    {
+        new("Reference & Notes", "/reference"),
+        new(Model.Article.Title, null)
+    };
+}
+
+<article class="page-container">
+    <header class="case-header">
+        <div class="case-kicker">Reference</div>
+        <h1>@Model.Article.Title</h1>
+        <p class="case-summary">@Model.Article.Summary</p>
+        @if (Model.Article.Sources.Count > 0)
+        {
+            <div class="source-badge-row">
+                @foreach (var s in Model.Article.Sources)
+                {
+                    <span class="source-badge">@s</span>
+                }
+            </div>
+        }
+    </header>
+
+    @if (Model.Article.IsFlagged && !string.IsNullOrWhiteSpace(Model.Article.FlagNote))
+    {
+        <div class="flag-banner">
+            @Html.Raw(IconHelper.Get("flag")) <strong>Flagged:</strong> @Model.Article.FlagNote
+        </div>
+    }
+
+    <div class="ref-body case-section-body">
+        @Html.Raw(Model.Article.BodyHtml)
+    </div>
+</article>

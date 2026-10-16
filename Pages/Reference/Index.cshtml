@@ -1,0 +1,23 @@
+@page "/reference"
+@model DevKnowledgeHub.Pages.Reference.IndexModel
+@{
+    ViewData["Title"] = "Reference & Notes";
+    ViewData["Crumbs"] = new List<BreadcrumbItem> { new("Reference & Notes", null) };
+}
+
+<div class="page-container">
+    <section class="hero" style="padding-top: 8px;">
+        <h1 style="font-size: 2rem;">Reference &amp; Notes</h1>
+        <p class="lead">Material that doesn't fit the problem/solution case format — a glossary and broader working notes, kept separate and clearly labeled.</p>
+    </section>
+
+    <div class="ref-card-list">
+        @foreach (var a in Model.Articles)
+        {
+            <a class="case-card" href="/reference/@a.Slug">
+                <h3>@a.Title @if (a.IsFlagged) { <span class="source-badge" style="color: var(--color-warning); border-color: var(--color-warning);">flagged</span> }</h3>
+                <p>@a.Summary</p>
+            </a>
+        }
+    </div>
+</div>

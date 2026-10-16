@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "devknowledgehub",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "C:\\Users\\mohammad.fadel\\source\\repos\\DevKnowledgeHub\\DevKnowledgeHub.csproj", "--urls", "http://localhost:5171"],
+      "port": 5171
+    }
+  ]
+}

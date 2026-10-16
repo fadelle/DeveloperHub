@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "sequences-iterators-async-streams",
+    "title": "Sequences, Iterators & Async Streams",
+    "summary": "Why IEnumerable<T> is lazy, how yield return builds an iterator by hand, and how IAsyncEnumerable<T> carries the same idea across an await.",
+    "icon": "stream",
+    "order": 1
+  },
+  {
+    "slug": "concurrency-task-orchestration",
+    "title": "Concurrency & Task Orchestration",
+    "summary": "What await inside a loop actually blocks, how Task.WhenAll differs from SemaphoreSlim, and how to pick a concurrency tool for a real message-driven pipeline.",
+    "icon": "concurrency",
+    "order": 2
+  },
+  {
+    "slug": "oop-design",
+    "title": "Object-Oriented Design",
+    "summary": "Inheritance vs. composition, and when runtime variation calls for polymorphism instead of generics.",
+    "icon": "oop",
+    "order": 3
+  },
+  {
+    "slug": "performance-resource-management",
+    "title": "Performance & Resource Management",
+    "summary": "Exposing data without copying it, caching expensive per-request lookups correctly, and what boxing and pass-by-value actually cost.",
+    "icon": "performance",
+    "order": 4
+  },
+  {
+    "slug": "databases-sql",
+    "title": "Databases & SQL",
+    "summary": "How a SQL query actually executes under the hood, and wrapping ADO.NET commands to add timing and diagnostics without touching the framework class.",
+    "icon": "database",
+    "order": 5
+  },
+  {
+    "slug": "testing-quality",
+    "title": "Testing & Quality",
+    "summary": "Test-driven development as a working cycle, and isolating dependencies with mocks instead of hitting real infrastructure in a unit test.",
+    "icon": "testing",
+    "order": 6
+  },
+  {
+    "slug": "software-architecture",
+    "title": "Software Architecture",
+    "summary": "The common architectural styles applications are built from, and a close look at microservices as the style with the most moving parts.",
+    "icon": "architecture",
+    "order": 7
+  }
+]

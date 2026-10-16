@@ -1,0 +1,106 @@
+﻿@inject ContentRepository Content
+@{
+    var crumbs = ViewData["Crumbs"] as List<BreadcrumbItem>;
+    var currentTopicSlug = ViewData["CurrentTopicSlug"] as string;
+    var currentCaseSlug = ViewData["CurrentCaseSlug"] as string;
+    var pageTitle = ViewData["Title"] as string;
+    var fullTitle = string.IsNullOrEmpty(pageTitle) ? "Dev Knowledge Hub" : $"{pageTitle} · Dev Knowledge Hub";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@fullTitle</title>
+    <meta name="description" content="A senior .NET engineer's practical reference: concurrency, async streams, OOP design, and performance, organized by real-world case." />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-shell">
+        <header class="site-header">
+            <button type="button" class="menu-toggle" aria-label="Toggle navigation">@Html.Raw(IconHelper.Get("menu"))</button>
+            <a class="brand" href="/">
+                <span class="brand-mark">DK</span>
+                <span>Dev Knowledge Hub</span>
+            </a>
+            <div class="search-box">
+                <span class="search-icon">@Html.Raw(IconHelper.Get("search"))</span>
+                <input id="site-search-input" type="search" placeholder="Search explanations and code…" autocomplete="off" aria-label="Search" />
+                <span class="search-kbd">/</span>
+                <div id="site-search-results" class="search-results" role="listbox"></div>
+            </div>
+            <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
+                <span class="icon-sun">@Html.Raw(IconHelper.Get("sun"))</span>
+                <span class="icon-moon">@Html.Raw(IconHelper.Get("moon"))</span>
+            </button>
+        </header>
+
+        <aside class="sidebar">
+            <nav aria-label="Primary">
+                <ul>
+                    @foreach (var topic in Content.Topics)
+                    {
+                        var isActiveTopic = string.Equals(topic.Slug, currentTopicSlug, StringComparison.OrdinalIgnoreCase);
+                        <li class="sidebar-topic @(isActiveTopic ? "active" : "")">
+                            <a href="/topics/@topic.Slug">
+                                @Html.Raw(IconHelper.Get(topic.Icon))
+                                <span>@topic.Title</span>
+                            </a>
+                            @if (isActiveTopic && topic.Cases.Count > 0)
+                            {
+                                <ul class="sidebar-cases">
+                                    @foreach (var c in topic.Cases)
+                                    {
+                                        var isActiveCase = string.Equals(c.Slug, currentCaseSlug, StringComparison.OrdinalIgnoreCase);
+                                        <li><a class="@(isActiveCase ? "active" : "")" href="/topics/@topic.Slug/@c.Slug">@c.Title</a></li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ul>
+                <div class="sidebar-section-title">Reference</div>
+                <ul>
+                    <li><a class="sidebar-flat-link" href="/reference">@Html.Raw(IconHelper.Get("reference")) <span>Vocabulary &amp; Notes</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            @if (crumbs is { Count: > 0 })
+            {
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    @foreach (var crumb in crumbs)
+                    {
+                        <span class="sep">/</span>
+                        @if (crumb.Url is null)
+                        {
+                            <span class="current">@crumb.Text</span>
+                        }
+                        else
+                        {
+                            <a href="@crumb.Url">@crumb.Text</a>
+                        }
+                    }
+                </nav>
+            }
+
+            @RenderBody()
+
+            <footer class="site-footer">
+                Built from one engineer's working notes — organized and designed for easy navigation. Code and technical conclusions are the author's own; connective explanations added for readability are marked as site notes.
+            </footer>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

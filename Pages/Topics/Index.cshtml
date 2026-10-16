@@ -1,0 +1,26 @@
+@page "/topics/{slug}"
+@model DevKnowledgeHub.Pages.Topics.IndexModel
+@{
+    ViewData["Title"] = Model.Topic.Title;
+    ViewData["CurrentTopicSlug"] = Model.Topic.Slug;
+    ViewData["Crumbs"] = new List<BreadcrumbItem> { new(Model.Topic.Title, null) };
+}
+
+<div class="page-container">
+    <section class="hero" style="padding-top: 8px;">
+        <h1 style="font-size: 2rem;">@Model.Topic.Title</h1>
+        <p class="lead">@Model.Topic.Summary</p>
+    </section>
+
+    <div class="case-list">
+        @for (int i = 0; i < Model.Topic.Cases.Count; i++)
+        {
+            var c = Model.Topic.Cases[i];
+            <a class="case-card" href="/topics/@Model.Topic.Slug/@c.Slug">
+                <div class="case-card-index">Case @(i + 1).</div>
+                <h3>@c.Title</h3>
+                <p>@c.Summary</p>
+            </a>
+        }
+    </div>
+</div>

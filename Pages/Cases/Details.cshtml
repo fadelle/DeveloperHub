@@ -1,0 +1,134 @@
+@page "/topics/{topicSlug}/{caseSlug}"
+@model DevKnowledgeHub.Pages.Cases.DetailsModel
+@{
+    ViewData["Title"] = Model.Case.Title;
+    ViewData["CurrentTopicSlug"] = Model.Topic.Slug;
+    ViewData["CurrentCaseSlug"] = Model.Case.Slug;
+    ViewData["Crumbs"] = new List<BreadcrumbItem>
+    {
+        new(Model.Topic.Title, $"/topics/{Model.Topic.Slug}"),
+        new(Model.Case.Title, null)
+    };
+}
+
+<article class="page-container">
+    <header class="case-header">
+        <div class="case-kicker">@Model.Topic.Title</div>
+        <h1>@Model.Case.Title</h1>
+        <p class="case-summary">@Model.Case.Summary</p>
+        @if (Model.Case.Sources.Count > 0)
+        {
+            <div class="source-badge-row">
+                @foreach (var s in Model.Case.Sources)
+                {
+                    <span class="source-badge" title="Original source file">@s</span>
+                }
+            </div>
+        }
+    </header>
+
+    @if (Model.Case.IsFlagged && !string.IsNullOrWhiteSpace(Model.Case.FlagNote))
+    {
+        <div class="flag-banner">
+            @Html.Raw(IconHelper.Get("flag")) <strong>Flagged:</strong> @Model.Case.FlagNote
+        </div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Case.ProblemHtml))
+    {
+        <section class="case-section">
+            <h2>Problem</h2>
+            <div class="callout problem">
+                <div class="case-section-body">@Html.Raw(Model.Case.ProblemHtml)</div>
+            </div>
+        </section>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Case.WhenItAppliesHtml))
+    {
+        <section class="case-section">
+            <h2>When It Applies</h2>
+            <div class="callout applies">
+                <div class="case-section-body">@Html.Raw(Model.Case.WhenItAppliesHtml)</div>
+            </div>
+        </section>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Case.SolutionHtml))
+    {
+        <section class="case-section">
+            <h2>Solution</h2>
+            <div class="callout solution">
+                <div class="case-section-body">@Html.Raw(Model.Case.SolutionHtml)</div>
+            </div>
+        </section>
+    }
+
+    @if (Model.Case.Examples.Count > 0)
+    {
+        <section class="examples-block">
+            <h2 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 14px;">Related Examples</h2>
+            <div class="tabs" role="tablist">
+                @for (int i = 0; i < Model.Case.Examples.Count; i++)
+                {
+                    <button type="button" class="tab-btn @(i == 0 ? "active" : "")" role="tab">@Model.Case.Examples[i].Title</button>
+                }
+            </div>
+            @for (int i = 0; i < Model.Case.Examples.Count; i++)
+            {
+                <div class="tab-panel @(i == 0 ? "active" : "")" role="tabpanel">
+                    <div class="case-section-body">@Html.Raw(Model.Case.Examples[i].ExplanationHtml)</div>
+                </div>
+            }
+        </section>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Case.TradeoffsHtml))
+    {
+        <section class="case-section tradeoffs">
+            <h2>Tradeoffs &amp; Common Mistakes</h2>
+            <div class="case-section-body">@Html.Raw(Model.Case.TradeoffsHtml)</div>
+        </section>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.Case.AlternativesHtml))
+    {
+        <section class="case-section alternatives">
+            <h2>Alternatives</h2>
+            <div class="case-section-body">@Html.Raw(Model.Case.AlternativesHtml)</div>
+        </section>
+    }
+
+    @if (Model.RelatedCases.Count > 0)
+    {
+        <section class="case-section">
+            <h2>Related Cases</h2>
+            <div class="related-cases">
+                @foreach (var rc in Model.RelatedCases)
+                {
+                    <a class="related-card" href="/topics/@rc.TopicSlug/@rc.Slug">
+                        <span class="related-topic">@rc.TopicTitle</span>
+                        @rc.Title
+                    </a>
+                }
+            </div>
+        </section>
+    }
+
+    <nav class="pager" aria-label="Case navigation">
+        @if (Model.PrevCase is not null)
+        {
+            <a class="pager-link prev" href="/topics/@Model.Topic.Slug/@Model.PrevCase.Slug">
+                <div class="pager-direction">&larr; Previous</div>
+                <div class="pager-title">@Model.PrevCase.Title</div>
+            </a>
+        }
+        @if (Model.NextCase is not null)
+        {
+            <a class="pager-link next" href="/topics/@Model.Topic.Slug/@Model.NextCase.Slug">
+                <div class="pager-direction">Next &rarr;</div>
+                <div class="pager-title">@Model.NextCase.Title</div>
+            </a>
+        }
+    </nav>
+</article>

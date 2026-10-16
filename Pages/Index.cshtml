@@ -1,0 +1,37 @@
+﻿@page "/"
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="page-container wide">
+    <section class="hero">
+        <h1>A senior .NET engineer's working knowledge, organized to actually read.</h1>
+        <p class="lead">
+            Concurrency, async streams, OOP design decisions, and performance tradeoffs —
+            drawn from real production cases, not textbook examples. @Model.TotalCases cases across
+            @Model.Topics.Count topics so far.
+        </p>
+    </section>
+
+    <div class="section-heading">
+        <h2>Browse by topic</h2>
+    </div>
+    <div class="topic-grid">
+        @foreach (var topic in Model.Topics)
+        {
+            <a class="topic-card" href="/topics/@topic.Slug">
+                <div class="topic-card-icon">@Html.Raw(IconHelper.Get(topic.Icon))</div>
+                <h3>@topic.Title</h3>
+                <p>@topic.Summary</p>
+                <div class="topic-card-count">@topic.Cases.Count case@(topic.Cases.Count == 1 ? "" : "s")</div>
+            </a>
+        }
+        <a class="topic-card" href="/reference">
+            <div class="topic-card-icon">@Html.Raw(IconHelper.Get("reference"))</div>
+            <h3>Reference &amp; Notes</h3>
+            <p>A plain-English vocabulary cheat sheet and broader notes that sit outside the case format.</p>
+            <div class="topic-card-count">Glossary + notes</div>
+        </a>
+    </div>
+</div>
