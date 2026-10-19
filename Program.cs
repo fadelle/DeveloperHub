@@ -29,13 +29,19 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Plain UseStaticFiles, not MapStaticAssets: MapStaticAssets' content-hashed
+// URLs are resolved from a manifest generated at build time, which (a) only
+// works without a real `dotnet publish` in Development, and (b) doesn't know
+// about search-index.json since that file is written above, after the build
+// already happened. UseStaticFiles just serves whatever's physically in
+// wwwroot by its literal name — correct in every environment, no manifest.
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+app.MapRazorPages();
 
 // Lets the static-export tool discover every page without hardcoding routes —
 // always in sync with whatever ContentRepository actually loaded.
