@@ -71,7 +71,10 @@
             <div class="tabs" role="tablist">
                 @for (int i = 0; i < Model.Case.Examples.Count; i++)
                 {
-                    <button type="button" class="tab-btn @(i == 0 ? "active" : "")" role="tab">@Model.Case.Examples[i].Title</button>
+                    <button type="button" class="tab-btn @(i == 0 ? "active" : "")" role="tab" aria-expanded="@(i == 0 ? "true" : "false")">
+                        <span class="tab-btn-icon" aria-hidden="true">@(i == 0 ? "−" : "+")</span>
+                        @Model.Case.Examples[i].Title
+                    </button>
                 }
             </div>
             @for (int i = 0; i < Model.Case.Examples.Count; i++)

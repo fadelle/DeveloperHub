@@ -44,18 +44,29 @@
       });
     }
 
-    // ----- Tabs -----
+    // ----- Tabs (collapsible: clicking the open tab closes it) -----
     document.querySelectorAll(".tabs").forEach(function (tabList) {
       var buttons = tabList.querySelectorAll(".tab-btn");
       var container = tabList.closest(".examples-block");
       if (!container) return;
       var panels = container.querySelectorAll(".tab-panel");
+
+      function setIcon(btn, open) {
+        var icon = btn.querySelector(".tab-btn-icon");
+        if (icon) icon.textContent = open ? "−" : "+";
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
       buttons.forEach(function (btn, idx) {
         btn.addEventListener("click", function () {
-          buttons.forEach(function (b) { b.classList.remove("active"); });
+          var wasActive = btn.classList.contains("active");
+          buttons.forEach(function (b) { b.classList.remove("active"); setIcon(b, false); });
           panels.forEach(function (p) { p.classList.remove("active"); });
-          btn.classList.add("active");
-          if (panels[idx]) panels[idx].classList.add("active");
+          if (!wasActive) {
+            btn.classList.add("active");
+            setIcon(btn, true);
+            if (panels[idx]) panels[idx].classList.add("active");
+          }
         });
       });
     });
