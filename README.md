@@ -179,7 +179,9 @@ copy-edited for flow — not invented.
   alternatives → related cases → prev/next pager.
 - **`Pages/Reference/Index`** / **`Pages/Reference/Details`** — the reference section.
 - **`Services/ContentRepository.cs`** — loads and parses every Markdown file at startup; also
-  builds the in-memory search index served by `GET /api/search?q=`.
+  builds the search index written to `wwwroot/search-index.json` at startup (served as a plain
+  static file — `site.js` fetches it once and filters client-side, so search works identically
+  whether the app is running live or exported to static HTML for GitHub Pages).
 - **`Services/IconHelper.cs`** — small inline-SVG icon set (no icon font dependency).
 - **`wwwroot/css/site.css`** — the entire design system (CSS custom properties for theming,
   light/dark via `prefers-color-scheme` + a manual toggle persisted in `localStorage`).
@@ -236,8 +238,6 @@ copy-edited for flow — not invented.
 | `Sql database interview questions.docx` | [SQL Interview Questions](Content/reference/sql-interview-questions.md) (Reference) |
 | `CIL intermediate language.docx` | [Why C# Compiles to CIL Instead of Machine Code](Content/performance-resource-management/cil-and-jit.md) |
 
-**38 of 38 source files mapped.** 20 parent cases across 7 topics, plus 4 reference articles.
-
 ### Batch 3 — `Downloads/case3/` (10 files)
 
 | Source file | Page(s) it became |
@@ -253,8 +253,15 @@ copy-edited for flow — not invented.
 | `Design Patterns Links.docx` | folded into [Programming Vocabulary Cheat Sheet](Content/reference/vocabulary-cheat-sheet.md) — further-reading links, no original prose to build a page from |
 | `Projects Main Things.docx` | *(not incorporated — see below)* |
 
-**47 of 48 source files mapped** across all three batches (one — `Projects Main Things.docx` —
-has no usable prose; see below). 25 parent cases across 7 topics, plus 4 reference articles.
+### Batch 4 — `Downloads/case4/` (2 files)
+
+| Source file | Page(s) it became |
+|---|---|
+| `CSharp_Thread_Safety_Guide.docx` | [Atomic Operations and Thread Safety with Interlocked](Content/concurrency-task-orchestration/interlocked-thread-safety.md) |
+| `API_Authentication_Guide_FIXED.docx` | [API Authentication Explained](Content/security-authentication/api-authentication-explained.md) — new topic |
+
+**49 of 50 source files mapped** across all four batches (one — `Projects Main Things.docx` —
+has no usable prose; see below). 27 parent cases across 8 topics, plus 4 reference articles.
 
 ### Not yet incorporated
 

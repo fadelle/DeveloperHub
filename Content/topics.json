@@ -47,5 +47,12 @@
     "summary": "The common architectural styles applications are built from, and a close look at microservices as the style with the most moving parts.",
     "icon": "architecture",
     "order": 7
+  },
+  {
+    "slug": "security-authentication",
+    "title": "Security & Authentication",
+    "summary": "How API authentication actually works — API keys, OAuth 2.0, bearer tokens, and JWTs — and which one fits a given integration.",
+    "icon": "security",
+    "order": 8
   }
 ]
