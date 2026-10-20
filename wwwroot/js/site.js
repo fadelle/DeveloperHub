@@ -44,6 +44,19 @@
       });
     }
 
+    // ----- Sidebar topic expand/collapse -----
+    document.querySelectorAll(".sidebar-toggle").forEach(function (toggle) {
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        var li = toggle.closest(".sidebar-topic");
+        if (!li) return;
+        var expanded = li.classList.toggle("expanded");
+        toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+        var icon = toggle.querySelector(".tab-btn-icon");
+        if (icon) icon.textContent = expanded ? "−" : "+";
+      });
+    });
+
     // ----- Tabs (collapsible: clicking the open tab closes it) -----
     document.querySelectorAll(".tabs").forEach(function (tabList) {
       var buttons = tabList.querySelectorAll(".tab-btn");

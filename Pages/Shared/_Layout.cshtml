@@ -45,12 +45,20 @@
                     @foreach (var topic in Content.Topics)
                     {
                         var isActiveTopic = string.Equals(topic.Slug, currentTopicSlug, StringComparison.OrdinalIgnoreCase);
-                        <li class="sidebar-topic @(isActiveTopic ? "active" : "")">
-                            <a href="/topics/@topic.Slug">
-                                @Html.Raw(IconHelper.Get(topic.Icon))
-                                <span>@topic.Title</span>
-                            </a>
-                            @if (isActiveTopic && topic.Cases.Count > 0)
+                        <li class="sidebar-topic @(isActiveTopic ? "active expanded" : "")">
+                            <div class="sidebar-topic-row">
+                                <a href="/topics/@topic.Slug">
+                                    @Html.Raw(IconHelper.Get(topic.Icon))
+                                    <span>@topic.Title</span>
+                                </a>
+                                @if (topic.Cases.Count > 0)
+                                {
+                                    <button type="button" class="sidebar-toggle" aria-expanded="@(isActiveTopic ? "true" : "false")" aria-label="Toggle @topic.Title cases">
+                                        <span class="tab-btn-icon" aria-hidden="true">@(isActiveTopic ? "−" : "+")</span>
+                                    </button>
+                                }
+                            </div>
+                            @if (topic.Cases.Count > 0)
                             {
                                 <ul class="sidebar-cases">
                                     @foreach (var c in topic.Cases)
