@@ -45,15 +45,32 @@
     }
 
     // ----- Sidebar topic expand/collapse -----
+    function toggleSidebarTopic(li) {
+      if (!li) return;
+      var expanded = li.classList.toggle("expanded");
+      var toggle = li.querySelector(".sidebar-toggle");
+      var icon = li.querySelector(".sidebar-topic-row .tab-btn-icon");
+      if (toggle) toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+      if (icon) icon.textContent = expanded ? "−" : "+";
+    }
+
     document.querySelectorAll(".sidebar-toggle").forEach(function (toggle) {
       toggle.addEventListener("click", function (e) {
         e.preventDefault();
-        var li = toggle.closest(".sidebar-topic");
-        if (!li) return;
-        var expanded = li.classList.toggle("expanded");
-        toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
-        var icon = toggle.querySelector(".tab-btn-icon");
-        if (icon) icon.textContent = expanded ? "−" : "+";
+        toggleSidebarTopic(toggle.closest(".sidebar-topic"));
+      });
+    });
+
+    // Clicking the topic name itself also toggles (not navigates) — a plain
+    // left-click only; modifier/middle clicks still open the topic page
+    // normally, since the link keeps its real href throughout.
+    document.querySelectorAll(".sidebar-topic-row > a").forEach(function (link) {
+      var li = link.closest(".sidebar-topic");
+      if (!li || !li.querySelector(".sidebar-cases")) return; // nothing to toggle — let it navigate
+      link.addEventListener("click", function (e) {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        toggleSidebarTopic(li);
       });
     });
 
