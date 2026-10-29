@@ -2,7 +2,7 @@
 title: "Passing Behavior as Data: Adapting Function Signatures with Func<T>"
 slug: func-as-behavior-parameter
 summary: A method can't be passed, returned, or assigned to a variable directly — but a delegate like Func<T> can, which is what makes it possible to accept wildly different method signatures through one parameter, by wrapping the mismatch in a small lambda adapter.
-order: 5
+order: 6
 sources: [Dynamic Func.docx]
 related: [adapter-pattern, polymorphism-vs-generics]
 ---

@@ -2,9 +2,9 @@
 title: "Polymorphism vs Generics: Choosing the Right Tool for Runtime Variation"
 slug: polymorphism-vs-generics
 summary: When a type is chosen at runtime from data or config and its behavior differs per type, generics are the wrong tool — even though a generic class with T is often the first thing that looks like it fits.
-order: 2
+order: 3
 sources: [Polymorphism limitations.docx, common interface for multiple repos.docx, Generic vs Polymorphism (abstract classes and interfaces).docx, Generics vs Polymorphism (Abstraction).docx]
-related: [inheritance-vs-composition, adapter-pattern]
+related: [code-smells-and-polymorphism, inheritance-vs-composition, adapter-pattern]
 ---
 
 ## Problem

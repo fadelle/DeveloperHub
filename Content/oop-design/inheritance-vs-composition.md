@@ -4,7 +4,7 @@ slug: inheritance-vs-composition
 summary: Inheritance models "is-a," composition models "has-a" — and in .NET, composition wins more often than the textbook examples suggest, because dependency injection is built around it.
 order: 1
 sources: [DotNet_Inheritance_vs_Composition_CSharp.docx]
-related: [polymorphism-vs-generics, extending-a-class-you-cant-modify]
+related: [code-smells-and-polymorphism, polymorphism-vs-generics, extending-a-class-you-cant-modify]
 ---
 
 ## Problem

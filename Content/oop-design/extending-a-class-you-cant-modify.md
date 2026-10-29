@@ -2,7 +2,7 @@
 title: "Extending a Class You Can't Modify: Extension Methods, Decorator, and Composition"
 slug: extending-a-class-you-cant-modify
 summary: A library class or a sealed class needs new or modified behavior, but you can't touch its source and can't inherit from it — three ways to add functionality from the outside, and when each one fits.
-order: 4
+order: 5
 sources: [Best way to add functionality to library classes.docx, extending sealed classes.docx]
 related: [inheritance-vs-composition, adapter-pattern, sqlcommand-decorator]
 ---

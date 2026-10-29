@@ -2,7 +2,7 @@
 title: "Adapter Pattern: Bridging an Incompatible Interface"
 slug: adapter-pattern
 summary: Two things need to work together but were never designed to — the Adapter pattern translates one interface into another, so the code that depends on the interface never has to know a translation is happening.
-order: 3
+order: 4
 sources: [Adapter example.docx]
 related: [extending-a-class-you-cant-modify, polymorphism-vs-generics, func-as-behavior-parameter]
 ---

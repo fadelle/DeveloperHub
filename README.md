@@ -260,8 +260,14 @@ copy-edited for flow — not invented.
 | `CSharp_Thread_Safety_Guide.docx` | [Atomic Operations and Thread Safety with Interlocked](Content/concurrency-task-orchestration/interlocked-thread-safety.md) |
 | `API_Authentication_Guide_FIXED.docx` | [API Authentication Explained](Content/security-authentication/api-authentication-explained.md) — new topic |
 
-**49 of 50 source files mapped** across all four batches (one — `Projects Main Things.docx` —
-has no usable prose; see below). 27 parent cases across 8 topics, plus 4 reference articles.
+### Batch 5 — single file
+
+| Source file | Page(s) it became |
+|---|---|
+| `code_smells_explained_csharp_both_approaches.docx` | [Code Smells: switch on Type, if/else Chains, and the Case for Polymorphism](Content/oop-design/code-smells-and-polymorphism.md) |
+
+**50 of 51 source files mapped** across all five batches (one — `Projects Main Things.docx` —
+has no usable prose; see below). 28 parent cases across 8 topics, plus 4 reference articles.
 
 ### Not yet incorporated
 
