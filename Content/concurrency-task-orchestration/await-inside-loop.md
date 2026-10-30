@@ -2,9 +2,9 @@
 title: Does await Inside a Loop Block the Caller?
 slug: await-inside-loop
 summary: What await inside a called method actually pauses, and the three concurrency patterns that follow from it — sequential, fire-and-forget, and start-both-then-wait.
-order: 2
+order: 3
 sources: [Await_Inside_Loops_Three_Scenarios.docx]
-related: [threads-tpl-async, task-whenall-vs-semaphoreslim, concurrency-tool-comparison]
+related: [async-await-aspnetcore, threads-tpl-async, task-whenall-vs-semaphoreslim, concurrency-tool-comparison]
 ---
 
 ## Problem

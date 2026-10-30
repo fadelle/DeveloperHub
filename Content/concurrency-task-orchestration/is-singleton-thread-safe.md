@@ -2,7 +2,7 @@
 title: "Is a Singleton's Method Thread-Safe? It Depends on State, Not the Pattern"
 slug: is-singleton-thread-safe
 summary: Multiple threads calling the same singleton's method at once isn't automatically a problem — each call runs its own independent stack. The real question is what that method reads or writes on the shared instance itself.
-order: 8
+order: 9
 sources: [is singleton methods thread safe .docx]
 related: [concurrent-dictionary, interlocked-thread-safety]
 flagged: true

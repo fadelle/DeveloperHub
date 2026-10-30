@@ -2,7 +2,7 @@
 title: "ConcurrentDictionary: Avoiding Check-Then-Act Races on Shared State"
 slug: concurrent-dictionary
 summary: The obvious "check if the key exists, then add it" pattern on a plain Dictionary has a race condition baked in the moment more than one thread can reach it — ConcurrentDictionary's Try* methods close that gap atomically.
-order: 7
+order: 8
 sources: [Concurrent Dictionary C# (Thread Safe).docx]
 related: [threads-tpl-async, is-singleton-thread-safe, interlocked-thread-safety]
 ---

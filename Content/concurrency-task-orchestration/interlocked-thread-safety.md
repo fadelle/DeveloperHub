@@ -2,7 +2,7 @@
 title: "Atomic Operations and Thread Safety with Interlocked"
 slug: interlocked-thread-safety
 summary: Atomic does not mean thread-safe — an atomic operation can still sit inside a race condition. Knowing exactly what Interlocked protects, and what it doesn't, is the difference.
-order: 9
+order: 10
 sources: [CSharp_Thread_Safety_Guide.docx]
 related: [is-singleton-thread-safe, concurrent-dictionary, threads-tpl-async]
 ---

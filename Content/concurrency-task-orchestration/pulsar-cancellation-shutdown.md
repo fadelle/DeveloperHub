@@ -2,7 +2,7 @@
 title: "Pulsar Consumer: CancellationToken Layers and Graceful Shutdown"
 slug: pulsar-cancellation-shutdown
 summary: A real consumer has three different cancellation tokens in flight at once, each with a different responsibility — tracing exactly how a shutdown signal propagates through all three is what makes graceful shutdown actually graceful.
-order: 5
+order: 6
 sources: [Pulsar-Cancellation-Token-and-Shutdown-Flow.docx]
 related: [concurrency-tool-comparison, pub-sub-messaging]
 ---

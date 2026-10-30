@@ -2,9 +2,9 @@
 title: Task.WhenAll vs SemaphoreSlim: Waiting vs Limiting
 slug: task-whenall-vs-semaphoreslim
 summary: Two primitives that get confused constantly because they're almost always used together — one waits for completion, the other limits how much runs at once. Neither does the other's job.
-order: 3
+order: 4
 sources: [Task.WhenAll and SemaphoreSlim.docx]
-related: [threads-tpl-async, await-inside-loop, concurrency-tool-comparison]
+related: [async-await-aspnetcore, threads-tpl-async, await-inside-loop, concurrency-tool-comparison]
 ---
 
 ## Problem

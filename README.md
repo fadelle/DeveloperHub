@@ -266,8 +266,14 @@ copy-edited for flow — not invented.
 |---|---|
 | `code_smells_explained_csharp_both_approaches.docx` | [Code Smells: switch on Type, if/else Chains, and the Case for Polymorphism](Content/oop-design/code-smells-and-polymorphism.md) |
 
-**50 of 51 source files mapped** across all five batches (one — `Projects Main Things.docx` —
-has no usable prose; see below). 28 parent cases across 8 topics, plus 4 reference articles.
+### Batch 6 — single file
+
+| Source file | Page(s) it became |
+|---|---|
+| `Async_Await_in_DotNet_Guide.docx` | [async/await in ASP.NET Core: Where It Actually Helps](Content/concurrency-task-orchestration/async-await-aspnetcore.md) |
+
+**51 of 52 source files mapped** across all six batches (one — `Projects Main Things.docx` —
+has no usable prose; see below). 29 parent cases across 8 topics, plus 4 reference articles.
 
 ### Not yet incorporated
 

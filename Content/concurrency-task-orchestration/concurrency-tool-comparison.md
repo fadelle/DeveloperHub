@@ -2,7 +2,7 @@
 title: Choosing a Concurrency Tool: SemaphoreSlim vs Parallel.ForEachAsync vs Bounded Channel<T>
 slug: concurrency-tool-comparison
 summary: A side-by-side comparison of three ways to bound concurrency in an async pipeline, applied to a real Pulsar consumer processing batches with DB, Redis, and downstream publishing.
-order: 4
+order: 5
 sources: [Semaphore_ParallelForEach_Channel_Guide.docx, Queue_vs_Channel.docx]
 related: [await-inside-loop, task-whenall-vs-semaphoreslim, pulsar-cancellation-shutdown]
 ---

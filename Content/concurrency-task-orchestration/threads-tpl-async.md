@@ -4,7 +4,7 @@ slug: threads-tpl-async
 summary: Three layers of the same problem — raw threads, the Task Parallel Library, and async/await — each trading control for simplicity, and each suited to a different kind of work.
 order: 1
 sources: [Thread library vs TPL.docx, TPL library.docx, Async await vs TPL.docx, Introduction to Concurrency.docx, Task-Based Asynchronous Programming in C#.docx, async await c#.docx, AsyncAwait VS Task.Run.docx, IO Threads VS Worker Threads.docx]
-related: [await-inside-loop, task-whenall-vs-semaphoreslim]
+related: [async-await-aspnetcore, await-inside-loop, task-whenall-vs-semaphoreslim]
 ---
 
 ## Problem

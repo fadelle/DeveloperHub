@@ -2,7 +2,7 @@
 title: A Timer Calling Async Work Can Exhaust the Thread Pool
 slug: timer-async-thread-pool-exhaustion
 summary: A Timer firing every second, each tick kicking off an async I/O call, looks harmless — until the I/O gets slow enough that the thread pool runs out of room to run the next tick at all.
-order: 6
+order: 7
 sources: [Calling async fxn inside a timer.docx]
 related: [threads-tpl-async, task-whenall-vs-semaphoreslim]
 ---
